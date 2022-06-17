@@ -1,0 +1,5 @@
+export enum MenuButtonType {
+  COMMANDS = 'commands',
+  WEB_APP = 'web_app',
+  DEFAULT = 'default'
+}
