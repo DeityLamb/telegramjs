@@ -11,7 +11,7 @@ export class ApiService {
   ) {}
 
   public getMe (): Promise<UserMe> {
-    return this.request<UserMe>(Endpoints.GET_ME);
+    return this.fetch<UserMe>(Endpoints.GET_ME);
   }
 
   /**
@@ -24,7 +24,7 @@ export class ApiService {
    * Returns True on success. Requires no parameters.
   */
   public async logOut (): Promise<void> {
-    await this.request<void>(Endpoints.LOG_OUT);
+    await this.fetch<void>(Endpoints.LOG_OUT);
   }
 
   /**
@@ -35,14 +35,14 @@ export class ApiService {
    * Returns True on success. Requires no parameters. 
   */
   public async close (): Promise<void> {
-    await this.request<void>(Endpoints.CLOSE);
+    await this.fetch<void>(Endpoints.CLOSE);
   }
 
-  public async sendMessage (options: SendMessageOptions): Promise<Message> {
-    return this.request<Message>(Endpoints.SEND_MESSAGE, options)
+  public sendMessage (options: SendMessageOptions): Promise<Message> {
+    return this.fetch<Message>(Endpoints.SEND_MESSAGE, options)
   }
 
-  private request<T>(
+  private fetch<T>(
     method: Endpoints, data: Record<string, any> | null = null
   ): Promise<T> {
     
