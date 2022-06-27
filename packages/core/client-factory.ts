@@ -1,18 +1,29 @@
-import { Container } from 'inversify';
 import { Client } from './client';
-import { ClientConfig } from './client-config';
+import { Container } from 'inversify';
+import { ClientConfig } from './client.config';
 
 export class ClientFactoryStatic {
-  public async create (): Promise<Client> {
-    // const container = new Container({
-    //   autoBindInjectable: true,
-    //   defaultScope: 'Singleton'
-    // })
+  public async create (options: any): Promise<Client> {
 
-    const config = new ClientConfig()
-    const instance = new Client(config);
+    const container = this.createContainer();
 
-    return instance;
+    const client = container.get(Client);
+    const config = container.get(ClientConfig);
+
+    config.setToken(options.token);
+
+    return client;
+  }
+
+  private createContainer (): Container {
+    const container = new Container({
+      autoBindInjectable: true,
+      defaultScope: 'Singleton'
+    });
+
+    container.bind(Container).toConstantValue(container);
+
+    return container;
   }
 }
 

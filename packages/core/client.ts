@@ -1,11 +1,15 @@
 import { injectable } from 'inversify';
-import { ClientConfig } from './client-config';
+import { ClientConfig } from './client.config';
 import { ApiService } from './services'
 
 export class Client {
-  public readonly api = new ApiService(this.config);
 
   constructor (
-    private readonly config: ClientConfig
+    private readonly config: ClientConfig,
+    private readonly api: ApiService
   ) {}
+
+  public useCustomEntities (options: []) {
+    return this.config.useCustomEntities(options);
+  }
 }

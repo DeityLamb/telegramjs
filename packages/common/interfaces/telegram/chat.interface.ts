@@ -4,7 +4,7 @@ import type { Message } from './message.interface';
 import type { ChatPermissions } from './chat-permissions.interface';
 
 export interface Chat {
-  id: number;
+  id: string | number;
   type: ChatType;
   title?: string;
   username?: string;

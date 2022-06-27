@@ -1,7 +1,7 @@
 import { Endpoints } from '@telegramjs/common';
 import type { Message, UserMe, SendMessageOptions } from '@telegramjs/common';
 import { join } from 'path';
-import { ClientConfig } from '../client-config';
+import { ClientConfig } from '../client.config';
 import { API_URL } from '../constants';
 
 export class ApiService {
@@ -30,7 +30,8 @@ export class ApiService {
   /**
    * 
    * Use this method to close the bot instance before moving it from one local server to another.
-   * You need to delete the webhook before calling this method to ensure that the bot isn't launched again after server restart.
+   * You need to delete the webhook before calling this method to ensure
+   * that the bot isn't launched again after server restart.
    * The method will return error 429 in the first 10 minutes after the bot is launched.
    * Returns True on success. Requires no parameters. 
   */
@@ -42,22 +43,22 @@ export class ApiService {
     return this.fetch<Message>(Endpoints.SEND_MESSAGE, options)
   }
 
-  private fetch<T>(
+  private async fetch<T>(
     method: Endpoints, data: Record<string, any> | null = null
   ): Promise<T> {
     
-    const url = this.buildApiURL(method);
+    const url = this.buildFetchUrl(method);
     
-    return fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).then((o) => o.json())
+    });
+
+    return response.json();
   }
 
-  private buildApiURL (method: Endpoints): string {
+  private buildFetchUrl (method: Endpoints): string {
     
     const path = join('bot' + this.config.getToken(), method);
     const url = new URL(path, API_URL);
