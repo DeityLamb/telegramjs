@@ -1,8 +1,8 @@
-import { TelegramBotApi } from '../telegram-bot-api';
 import { Update } from './types';
+import { ITelegramBotApi } from './telegram-bot-api.interface';
 
 export interface TelegramEventEmitter {
-  readonly api: TelegramBotApi;
+  readonly api: ITelegramBotApi;
   emitUpdate (update: Update): void;
 }
 

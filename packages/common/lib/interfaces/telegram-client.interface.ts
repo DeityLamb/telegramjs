@@ -1,9 +1,9 @@
 import { Update } from './types';
-import { TelegramBotApi } from '../telegram-bot-api';
+import { ITelegramBotApi } from './telegram-bot-api.interface';
 
 export interface ITelegramClient {
 
-  readonly api: TelegramBotApi;
+  readonly api: ITelegramBotApi;
 
   on<K extends keyof Update>(eventName: K, listener: (data: NonNullable<Update[K]>) => void): this;
   once<K extends keyof Update>(eventName: K, listener: (data: NonNullable<Update[K]>) => void): this;

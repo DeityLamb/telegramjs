@@ -16,6 +16,7 @@
   },
   "node": ">=14.16",
   "scripts": {
+    "build": "lerna run build",
     "test": "jest --runInBand",
     "lint": "eslint \"packages/**/*.ts\" \"tests/**/*.ts\" --fix"
   }

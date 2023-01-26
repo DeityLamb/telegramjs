@@ -1,3 +1,3 @@
 export * from './telegram-bot-api';
 export * from './client';
-export * from './interfaces';
+export * from './adapters';

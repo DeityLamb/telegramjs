@@ -1,4 +1,4 @@
-import { EventSourceAdapter, GetUpdatesOptions, TelegramEventEmitter } from '../interfaces';
+import { GetUpdatesOptions, EventSourceAdapter, TelegramEventEmitter } from '@telegramjs/common';
 
 export class PollingAdapter implements EventSourceAdapter {
   

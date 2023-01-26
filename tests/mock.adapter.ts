@@ -1,4 +1,4 @@
-import { EventSourceAdapter, TelegramEventEmitter, Update } from '@telegramjs/api';
+import { EventSourceAdapter, TelegramEventEmitter, Update } from '@telegramjs/common';
 
 interface MockUpdate {
   data: Update;

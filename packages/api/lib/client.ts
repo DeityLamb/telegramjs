@@ -1,12 +1,16 @@
 import { EventEmitter } from 'events';
-import { PollingAdapter } from './adapters/polling.adapter';
-import { TelegramEventEmitter, EventSourceAdapter, ITelegramClient, TelegramClientOptions, Update } from './interfaces';
+import {
+  TelegramEventEmitter, EventSourceAdapter,
+  ITelegramClient, TelegramClientOptions, Update,
+  ITelegramBotApi
+} from '@telegramjs/common';
+import { PollingAdapter } from './adapters';
 import { TelegramBotApi } from './telegram-bot-api';
 
 export class Client extends EventEmitter implements ITelegramClient, TelegramEventEmitter {
 
   private constructor(
-    public readonly api: TelegramBotApi,
+    public readonly api: ITelegramBotApi,
     private readonly eventSourceAdapter: EventSourceAdapter
   ) {
     super();

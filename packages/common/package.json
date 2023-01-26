@@ -1,0 +1,26 @@
+{
+  "name": "@telegramjs/common",
+  "version": "1.0.0",
+  "description": "TelegramJS is a library simplifying interaction with the Telegram bot API",
+  "keywords": [
+    "telegram",
+    "telegramjs",
+    "bot",
+    "telegram-api",
+    "telegram-bot",
+    "tg-bot",
+    "tg-api",
+    "tg",
+    "ts",
+    "typescript",
+    "js",
+    "javascript"
+  ],
+  "author": "Alexey Rakityansky <deitylamb@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json"
+  }
+}
