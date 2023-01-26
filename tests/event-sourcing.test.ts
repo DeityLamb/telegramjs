@@ -1,4 +1,4 @@
-import { Client } from '../lib';
+import { Client } from '@telegramjs/api';
 import { MockAdapter } from './mock.adapter';
 
 const TEST_BOT_TOKEN = process.env.TEST_BOT_TOKEN as string;
@@ -26,7 +26,7 @@ const mockAdapter = new MockAdapter([{
       text: 'Hello !'
     }
   },
-  timeout: 1000
+  timeout: 100
 }]);
 
 test('event sourcing', async () => {
@@ -36,11 +36,15 @@ test('event sourcing', async () => {
   });
   await client.listen();
 
-  await new Promise((res) => client.once('message', (message) => {
-    
-    client.api.sendMessage({ chatId: message.chat.id, text: 'Hi !' })
-    client.stop();
-    res(null);
-  }));
-  expect(2+2).toBeTruthy();
+  const resolved = await new Promise((res) => {
+    client.once('message', (message) => {
+
+      client.api.sendMessage({ chatId: message.chat.id, text: 'Hi !' });
+      client.stop();
+
+      res(true);
+    });
+  });
+
+  expect(resolved).toBeTruthy();
 });

@@ -1,0 +1,35 @@
+{
+  "name": "@telegramjs/api",
+  "version": "1.0.0",
+  "description": "@telegramjs/api is a library simplifying interaction with the Telegram bot API",
+  "keywords": [
+    "telegram",
+    "telegramjs",
+    "bot",
+    "telegram-api",
+    "telegram-bot",
+    "tg-bot",
+    "tg-api",
+    "tg",
+    "ts",
+    "typescript",
+    "js",
+    "javascript"
+  ],
+  "author": "Alexey Rakityansky <deitylamb@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "camelcase-keys": "^6.2.2",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.8",
+    "snakecase-keys": "^5.4.4"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.2"
+  }
+}

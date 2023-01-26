@@ -1,4 +1,4 @@
-import { TelegramBotApi } from '../lib';
+import { TelegramBotApi } from '@telegramjs/api';
 
 const TEST_BOT_TOKEN = process.env.TEST_BOT_TOKEN as string;
 const telegram = new TelegramBotApi(TEST_BOT_TOKEN);

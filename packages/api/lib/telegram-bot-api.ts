@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
-import { snakelize, camelize } from './utils';
+import snakelize from 'snakecase-keys';
+import camelize from 'camelcase-keys';
 import { API_URL } from './constants';
 import {
   BotCommand, Chat,
@@ -1341,26 +1342,36 @@ export class TelegramBotApi {
     return this.fetch<GameHighScore[]>('getGameHighScores', options);
   }
 
-  private async fetch<T>(method: string, body: Record<string, any> = {}): Promise<T> {
+  private async fetch<T>(
+    method: string,
+    body: Record<string, any> = {}
+  ): Promise<T> {
     const url = API_URL + '/' + 'bot' + this.token + '/' + method;
 
     const res = await fetch(url, {
       method: 'POST',
 
-      body: body instanceof FormData
-        ? body
+      body: this.isFormData(body)
+        ? body as FormData
         : JSON.stringify(snakelize(body)),
 
-      headers: body instanceof FormData
+      headers: this.isFormData(body)
         ? body.getHeaders()
         : { 'Content-Type':  'application/json' }
     })
       .then((res) => res.json() as Promise<{ ok: boolean, result: T }>);
 
     if (!res.ok) {
-      return Promise.reject(res);
+      return Promise.reject(camelize(res));
     }
 
-    return camelize<T>(res.result) as T;
+    return camelize(res.result as any) as T;
+  }
+
+  private isFormData (data: any): boolean {
+    return 'writable' in data
+      && 'readable' in data
+      && 'dataSize' in data
+      && 'maxDataSize' in data;
   }
 }

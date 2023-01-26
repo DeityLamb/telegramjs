@@ -1,4 +1,4 @@
-import { EventSourceAdapter, TelegramEventEmitter, Update } from '../lib';
+import { EventSourceAdapter, TelegramEventEmitter, Update } from '@telegramjs/api';
 
 interface MockUpdate {
   data: Update;
@@ -8,7 +8,7 @@ interface MockUpdate {
 export class MockAdapter implements EventSourceAdapter {
   
   private emitter: TelegramEventEmitter | null = null;
-  private readonly updates: MockUpdate[]
+  private readonly updates: MockUpdate[];
   private stopped = false;
   private offset = 0;
 
@@ -19,7 +19,7 @@ export class MockAdapter implements EventSourceAdapter {
       .map((update) => 'timeout' in update
         ? update
         : ({ data: update, timeout: 0 })
-      )
+      );
   }
 
   public subscribeEmitter (emitter: TelegramEventEmitter): void {
